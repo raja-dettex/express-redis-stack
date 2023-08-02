@@ -1,0 +1,83 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "API Documentation in Node.js Using Swagger",
+      "description": "User Restful webservice application"
+      
+    },
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "swagger",
+        "description": "endpoints description"
+      }
+    ],
+    "produces": ["application/json"],
+    "paths": {
+      "/users": {
+        "post": {
+          "summary": "create an user",
+          "responses": {
+            "201": {
+              "description": "ok",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        }
+      },
+      "/user/:id": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the user which is to be searched",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "get": {
+          "tags": ["Users"],
+          "summary": "Get user by id",
+          "responses": {
+            "200": {
+              "description": "ok",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "404": {
+              "description": "not found"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": ["username", "email"],
+        "properties": {
+          
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "createdAt" : {
+            "type": "date"
+          },
+          "updatedAt" : {
+            "type" : "date"
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "$ref": "#/definitions/User"
+      }
+    }
+  }
